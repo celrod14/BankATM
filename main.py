@@ -1,28 +1,53 @@
+from os.path import exists
 
 from Account import *
 from Person import *
 
 import time
 
-myAccount = Account('Bob Thorton', 'Savings', 25000)
+def getAccountType():
+    accountOption = input("Create a savings or checking account?")
+    if accountOption.title() == 'Savings':
 
-print(myAccount.account_balance())
+        savingsAccount = Account('Bob Thorton', 'Savings', 25000)
+        return savingsAccount
+    elif accountOption.title() == 'Checking':
+        checkingAccount = Account('Billy Joe', 'Checking', 30)
+        return checkingAccount
+    else:
+        print('Invalid account type')
+        exit()
 
-myAccount.deposit(50000)
+account = getAccountType()
 
-print(myAccount.account_balance())
+if account:
+    print(account.account_balance())
 
-myAccount.withdraw(20000)
+    account.deposit(50000)
 
-print(myAccount.account_balance())
+    print(account.account_balance())
 
-myAccount.interest_accrued_n_years(5)
+    account.withdraw(20000)
 
-p1 = Person(720)
+    print(account.account_balance())
 
-print(p1.get_credit_score())
+    account.interest_accrued_n_years(1)
 
-print(p1.change_credit_score())
+    p1 = Person(720)
+
+    print(p1.get_credit_score())
+
+    # denied
+    print(account.apply_loan(p1.creditScore))
+
+    print(p1.change_credit_score())
+
+    # approved
+    print(account.apply_loan(p1.creditScore))
+else:
+    exit()
+
+
 
 
 
